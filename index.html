@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #04167c;
+    }
+    .login-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .login-form {
+      max-width: 400px;
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      border-radius: 5%;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .login-form h3 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .cabeçalho {
+      margin-bottom: 20px;
+    }
+
+    .imgLogo{
+      width: 270px;
+      height: 135px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="login-container">
+      <div class="cabeçalho">
+        <img src="/logo.png" alt="logo" class="imgLogo">
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="login-form">
+            <h3>Faça login</h3>
+            <form id="loginForm">
+              <div class="form-group">
+                <input type="text" class="form-control" id="username" placeholder="Username" required>
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" id="password" placeholder="Password" required>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission
+
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+
+      // Simple validation (for demonstration purposes)
+      if (username === 'user' && password === 'password') {
+        // If username and password match, redirect to another page
+        window.location.href = 'home.html';
+      } else {
+        // If username and password don't match, display an alert
+        alert('Username or password incorrect. Please try again.');
+      }
+    });
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="scripts.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastrar Prédio</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+  <style>
+    body {
+      background-color: #04167c;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+
+    h1 {
+      text-align: center;
+      color: #007bff;
+      margin-bottom: 30px;
+    }
+
+    .form-group label {
+      font-weight: bold;
+    }
+
+    .btn-group-toggle label.btn {
+      margin-bottom: 10px;
+    }
+
+    .btn-group-toggle label.btn input[type="checkbox"] {
+      display: none;
+    }
+
+    .btn-group-toggle label.btn {
+      cursor: pointer;
+    }
+
+    .btn-group-toggle label.btn input[type="checkbox"]:checked+.btn {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .btn-group-toggle label.btn input[type="checkbox"]:focus+.btn {
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    .btn-group-toggle label.btn input[type="checkbox"]:active+.btn {
+      background-color: #0056b3;
+      color: #fff;
+    }
+
+    .alert {
+      margin-top: 10px;
+      display: none;
+    }
+
+    #messageContainer {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1000; 
+      max-width: 400px;
+      padding: 20px;
+      background-color: #f8d7da; 
+      border: 1px solid #f5c6cb; 
+      border-radius: 5px;
+      text-align: center;
+      display: none;
+    }
+
+    #messageContainer.alert-success {
+      background-color: #d4edda; 
+      border: 1px solid #c3e6cb; 
+    }
+
+    #messageText {
+      margin-bottom: 10px;
+    }
+
+    #btn-ok {
+      margin-top: 10px;
+    }
+
+    #overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999; 
+  display: none; 
+}
+
+  </style>
+</head>
+<body>
+  <div id="overlay"></div>
+
+  <div class="container">
+    <button type="button" class="btn btn-primary" id="button" onclick="voltar()">Voltar</button>
+
+    <h1 class="mt-5 mb-4">Cadastrar Prédio</h1>
+    <form id="prédioForm" action="/cadastrar" method="POST">
+
+
+      <div class="form-group">
+        <label for="nome">Nome do Prédio:</label>
+        <input type="text" class="form-control" id="nome" name="nomePredio"  placeholder="Nome do Prédio">
+      </div>
+      <div class="form-group">
+        <label for="cidade">Cidade:</label>
+
+        <ul class="list-unstyled">
+            <li>
+                <input type="checkbox" id="cidadeApucarana" name="cidade" value="Apucarana">
+                <label for="cidadeApucarana">Apucarana</label>
+              </li>
+              <li>
+                <input type="checkbox" id="cidadeArapongas" name="cidade" value="Arapongas">
+                <label for="cidadeArapongas">Arapongas</label>
+              </li>
+              <li>
+                <input type="checkbox" id="cidadeAstorga" name="cidade" value="Astorga">
+                <label for="cidadeAstorga">Astorga</label>
+              </li>
+              <li>
+                <input type="checkbox" id="cidadeCampoMourao" name="cidade" value="Campo Mourão">
+                <label for="cidadeCampoMourao">Campo Mourão</label>
+              </li>
+              <li>
+                <input type="checkbox" id="cidadeCianorte" name="cidade" value="Cianorte">
+                <label for="cidadeCianorte">Cianorte</label>
+              </li>
+              <li>
+                <input type="checkbox" id="cidadeEngenheiroBeltrao" name="cidade" value="Engenheiro Beltrão">
+                <label for="cidadeEngenheiroBeltrao">Engenheiro Beltrão</label>
+              </li>
+              <li>
+                <input type="checkbox" id="cidadeIvaipora" name="cidade" value="Ivaiporã">
+                <label for="cidadeIvaipora">Ivaiporã</label>
+              </li>
+              <li>
+                <input type="checkbox" id="cidadeItambe" name="cidade" value="Itambe">
+                <label for="cidadeItambe">Itambe</label>
+              </li>
+              <li>
+                <input type="checkbox" id="cidadeJandaia" name="cidade" value="Jandaiadosul">
+                <label for="cidadeJandaia">Jandaia do sul</label>
+              </li>
+              <li>
+                <input type="checkbox" id="cidadeLoanda" name="cidade" value="Loanda">
+                <label for="cidadeLoanda">Loanda</label>
+              </li>
+              <li>
+                <input type="checkbox" id="cidadeMadaguacu" name="cidade" value="Madaguaçu">
+                <label for="cidadeMadaguacu">Mandaguaçu</label>
+              </li>
+              <li>
+                <input type="checkbox" id="cidadeMandaguari" name="cidade" value="Mandaguari">
+                <label for="cidadeMandaguari">Mandaguari</label>
+              </li>
+              <li>
+                <input type="checkbox" id="cidadeMaringa" name="cidade" value="Maringá">
+                <label for="cidadeMaringa">Maringá</label>
+              </li>
+              <li>
+                <input type="checkbox" id="cidadeMarialva" name="cidade" value="Marialva">
+                <label for="cidadeMarialva">Marialva</label>
+              </li>
+              <li>
+                <input type="checkbox" id="cidadeNovaEsperanca" name="cidade" value="Nova Esperança">
+                <label for="cidadeNovaEsperanca">Nova Esperança</label>
+              </li>
+              <li>
+                <input type="checkbox" id="cidadePaicandu" name="cidade" value="Paiçandu">
+                <label for="cidadePaicandu">Paiçandu</label>
+              </li>
+              <li>
+                <input type="checkbox" id="cidadeParanavai" name="cidade" value="Paranavaí">
+                <label for="cidadeParanavai">Paranavaí</label>
+              </li>
+              <li>
+                <input type="checkbox" id="cidadePeabiru" name="cidade" value="peabiru">
+                <label for="cidadePeabiru">Peabiru</label>
+              </li>
+              <li>
+                <input type="checkbox" id="cidadePortorico" name="cidade" value="Portorico">
+                <label for="cidadePortorico">Porto Rico</label>
+              </li>
+              <li>
+                <input type="checkbox" id="cidadePortosaojose" name="cidade" value="portosãojose">
+                <label for="cidadePortosaojose">Porto São José</label>
+              </li>
+              <li>
+                <input type="checkbox" id="cidadeSarandi" name="cidade" value="Sarandi">
+                <label for="cidadeSarandi">Sarandi</label>
+              </li>
+          </ul>
+          
+      </div>
+      <div class="form-group">
+        <label for="bairro">Bairro:</label>
+        <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Bairro">
+      </div>
+      <div class="form-group">
+        <label for="rua">Rua:</label>
+        <input type="text" class="form-control" id="rua" name="rua" placeholder="Rua">
+      </div>
+      <div class="form-group">
+        <label>Cor:</label><br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="cor" id="corPreto" value="preto">
+          <label class="form-check-label" for="corPreto">Preto</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="cor" id="corBranco" value="branco">
+          <label class="form-check-label" for="corBranco">Branco</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="cor" id="corCinza" value="cinza">
+          <label class="form-check-label" for="corCinza">Cinza</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="sala">Medidas da Sala:</label>
+        <input type="" class="form-control" id="sala" name="medidas_sala" placeholder="Medidas da Sala">
+      </div>
+      <div class="form-group">
+        <label for="cozinha">Medidas da Cozinha:</label>
+        <input type="" class="form-control" id="cozinha" name="medidas_cozinha" placeholder="Medidas da Cozinha">
+      </div>
+      <div class="form-group">
+        <label for="banheiro">Medidas do Banheiro:</label>
+        <input type="" class="form-control" id="banheiro" name="medidas_banheiro" placeholder="Medidas do Banheiro">
+      </div>
+      <div class="form-group">
+        <label for="lavanderia">Medidas da lavanderia:</label>
+        <input type="" class="form-control" id="lavanderia" name="medidas_lavandeiria" placeholder="Medidas da lavanderia">
+      </div>
+      <div class="form-group">
+        <label for="quarto">Medidas dos quartos:</label>
+        <input type="text" class="form-control" id="quarto" name="medidas_quarto" placeholder="Medidas do quarto">
+      </div>
+      <div class="form-group">
+        <label for="sacada">Medidas da sacada:</label>
+        <input type="" class="form-control" id="sacada" name="medidas_sacada" placeholder="Medidas da sacada">
+      </div>
+
+
+      <button type="submit" class="btn btn-primary" id="btn-cadastrar">Cadastrar</button>
+    </form>
+  </div>
+
+  <div id="messageContainer" class="container">
+    <div id="messageText"></div>
+    <button type="button" class="btn btn-primary" id="btn-ok">OK</button>
+  </div>
+
+  <script>
+  document.getElementById('prédioForm').addEventListener('submit', function(event) {
+  event.preventDefault(); 
+
+  var success = true;
+
+  var messageContainer = document.getElementById('messageContainer');
+  var overlay = document.getElementById('overlay');
+  messageContainer.style.display = 'block';
+  overlay.style.display = 'block';
+
+  var messageText = document.getElementById('messageText');
+  if (success) {
+    messageText.innerText = 'Prédio cadastrado com sucesso!';
+    messageContainer.classList.add('alert-success');
+  } else {
+    messageText.innerText = 'Erro ao cadastrar prédio. Tente novamente.';
+  }
+});
+
+document.getElementById('btn-ok').addEventListener('click', function() {
+  var messageContainer = document.getElementById('messageContainer');
+  var overlay = document.getElementById('overlay');
+  messageContainer.style.display = 'none';
+  messageContainer.classList.remove('alert-success');
+  overlay.style.display = 'none';
+});
+
+function voltar() {
+    window.location.href = "/home.html";
+}
+
+
+
+  </script>
+  
+  
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Procurar Prédios</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <style>
+    #predios-list {
+      list-style-type: none;
+      padding: 0;
+    }
+  
+    #predios-list li {
+      background-color: #f9f9f9;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease;
+    }
+  
+    #predios-list li:hover {
+      background-color: #e8e8e8;
+    }
+  </style>
+  
+
+</head>
+<body>
+  <div class="container">
+    <button type="button" class="btn btn-primary" id="button" onclick="voltar()">Voltar</button>
+    <h1 class="mt-5 mb-4">Procurar Prédios</h1>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" id="searchInput" onkeyup="myFunction()" placeholder="Digite o nome do prédio" aria-label="Digite o nome do prédio" aria-describedby="button-addon2">
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="button" id="button-addon2">Pesquisar</button>
+      </div>
+    </div>
+    <ul id="predios-list"></ul> 
+  </div>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('http://localhost:8080/predios')
+        .then(response => response.json())
+        .then(data => {
+          if (data.sucesso) {
+            const predios = data.predios;
+            const prediosList = document.getElementById('predios-list');
+
+            predios.forEach(predio => {
+              const listItem = document.createElement('li');
+              listItem.textContent = predio.nome + ' - ' + predio.cor;
+              prediosList.appendChild(listItem);
+            });
+          } else {
+            console.error('Erro ao buscar prédios:', data.mensagem);
+          }
+        })
+        .catch(error => {
+          console.error('Erro na requisição:', error);
+        });
+    });
+
+
+    function myFunction() {
+    // Captura o valor digitado no input
+    var input = document.getElementById('searchInput').value.toUpperCase();
+    
+    // Captura a lista de prédios
+    var prediosList = document.getElementById('predios-list');
+    
+    // Captura os itens da lista de prédios
+    var items = prediosList.getElementsByTagName('li');
+    
+    // Loop pelos itens da lista de prédios
+    for (var i = 0; i < items.length; i++) {
+      var item = items[i];
+      
+      // Captura o texto do item em maiúsculas
+      var textValue = item.textContent || item.innerText;
+      textValue = textValue.toUpperCase();
+      
+      // Verifica se o texto do item contém o valor digitado no input
+      if (textValue.indexOf(input) > -1) {
+        // Se contém, mantém o item visível
+        item.style.display = "";
+      } else {
+        // Se não contém, esconde o item
+        item.style.display = "none";
+      }
+    }
+  }
+
+  function voltar() {
+    window.location.href = "/home.html";
+}
+
+
+  </script>
+  
+</body>
+</html>
